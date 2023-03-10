@@ -1,10 +1,10 @@
-import Workouts from "./Components/Workouts/Workouts";
+import MyWorkouts from "./Components/Workouts/MyWorkouts";
 import MainContainer from "./DefaultContainer";
 
 const WorkoutsPage = () => {
   return (
     <MainContainer>
-      <Workouts />
+      <MyWorkouts />
     </MainContainer>
   );
 }

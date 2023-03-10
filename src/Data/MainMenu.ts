@@ -11,6 +11,7 @@ export const mainMenu: SelectorItem[] = [
         id: 2,
         image: "/Images/workout-plan.svg",
         title: "Workout",
-        description: "Manage your nutrition, calculate your macro , see diets"
+        description: "Create a new workout session", 
+        navigateTo: "/new-workout"
     },
 ]

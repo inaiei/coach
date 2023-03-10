@@ -22,6 +22,7 @@ export interface SelectorItem {
     image: string;
     title: string;
     description: string;
+    navigateTo?: string;
 }
 
 export interface ActivityLevel extends SelectorItem {

@@ -1,4 +1,5 @@
 import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
 import { SelectorItem } from "../../Data/Types";
 import CardSelectorItem from "./CardSelectorItem";
 
@@ -11,6 +12,22 @@ interface CardSelectorProp {
 }
 
 const CardSelector = ({ items, xs, sm, md, selectedItem }: CardSelectorProp) => {
+  const navigate = useNavigate();
+
+  const onSelected = (item:SelectorItem, isSelected:boolean) => {
+    if (item.navigateTo && isSelected) {
+      navigate(item.navigateTo);
+    }
+
+    if(isSelected && item.id === selectedItem?.id) {
+      selectedItem = undefined;
+    } else if (isSelected) {
+      selectedItem = item
+    }
+
+    // update the selected value somewhere
+  }
+
   return (
     <Grid
       container
@@ -24,6 +41,7 @@ const CardSelector = ({ items, xs, sm, md, selectedItem }: CardSelectorProp) => 
           <CardSelectorItem
             item={item}
             isSelected={item.id === selectedItem?.id}
+            onSelect={onSelected}
           />
         </Grid>
       ))}

@@ -18,32 +18,34 @@ import Routers from "./Routers";
 import WorkoutPage from "./WorkoutPage";
 import WorkoutsPage from "./WorkoutsPage";
 import Macros from "./Macros";
+import NewWorkoutPage from "./NewWorkoutPage";
 
 const App = () => {
   return (
-    <GlobalStore>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <LocalizationProvider dateAdapter={AdapterMoment}>
-          <Box sx={{ padding: {xs:0, sm:2} }}>
-            <Routes>
-              <Route path={Routers.signup} element={<SignUp />} />
-              <Route path={Routers.signupContact} element={<SignUpContactDetails />} />
-              <Route path={Routers.signupPersonalInfo} element={<SignUpPersonalInfo />} />
-              <Route path={Routers.signupGoal} element={<SignUpGoal />} />
-              <Route path={Routers.signupActivityLevel} element={<SignUpActivityLevel />} />
-              <Route path={Routers.profile} element={<Profile />} />
-              <Route path={Routers.workout} element={<WorkoutPage />} />
-              <Route path={Routers.workouts} element={<WorkoutsPage />} />
-              <Route path={Routers.login} element={<Login />} />
-              <Route path={Routers.default} element={<Default />} />
-              <Route path={Routers.macros} element={<Macros />} />
-              <Route path="/" element={<Login />} />
-            </Routes>
-          </Box>
-        </LocalizationProvider>
-      </ThemeProvider>
-    </GlobalStore>
+      <GlobalStore>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <LocalizationProvider dateAdapter={AdapterMoment}>
+            <Box sx={{ padding: { xs: 0, sm: 2 } }}>
+              <Routes>
+                <Route path={Routers.signup} element={<SignUp />} />
+                <Route path={Routers.signupContact} element={<SignUpContactDetails />} />
+                <Route path={Routers.signupPersonalInfo} element={<SignUpPersonalInfo />} />
+                <Route path={Routers.signupGoal} element={<SignUpGoal />} />
+                <Route path={Routers.signupActivityLevel} element={<SignUpActivityLevel />}/>
+                <Route path={Routers.profile} element={<Profile />} />
+                <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
+                <Route path={Routers.workout} element={<WorkoutPage />} />
+                <Route path={Routers.workouts} element={<WorkoutsPage />} />
+                <Route path={Routers.login} element={<Login />} />
+                <Route path={Routers.default} element={<Default />} />
+                <Route path={Routers.macros} element={<Macros />} />
+                <Route path="/" element={<Login />} />
+              </Routes>
+            </Box>
+          </LocalizationProvider>
+        </ThemeProvider>
+      </GlobalStore>
   );
 };
 

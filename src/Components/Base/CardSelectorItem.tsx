@@ -7,12 +7,13 @@ import { SelectorItem } from "../../Data/Types";
 
 interface CardSelectorItemProp {
     item: SelectorItem;
-    isSelected?: boolean
+    isSelected?: boolean;
+    onSelect?:any
 }
 
-const CardSelectorItem = ({item, isSelected}: CardSelectorItemProp) => {
+const CardSelectorItem = ({item, isSelected, onSelect}: CardSelectorItemProp) => {
   return (
-    <Card sx={{ height: "100%", backgroundColor: isSelected ? "#639fe0" : "#fff" }}>
+    <Card sx={{ height: "100%", backgroundColor: isSelected ? "#639fe0" : "#fff" }} onClick={() => onSelect(item, !isSelected)}>
       <CardActionArea>
         <CardMedia
           component="img"

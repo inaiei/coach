@@ -11,8 +11,7 @@ export const saveProfile = async (userProfile: UserProfile) => {
 }
 
 export const getProfile = async (email: string) => {
-    //const url = process.env.REACT_APP_API_URL + '/userprofiles?email=' + email;
-    const url = process.env.REACT_APP_API_URL + '/userprofiles?email=mike';
+    const url = process.env.REACT_APP_API_URL + '/userprofiles?email=' + email;
     return await fetch(url, {
         method: 'GET',
         headers: { Accept: 'application/json' }

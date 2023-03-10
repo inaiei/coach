@@ -6,6 +6,7 @@ const Routers = {
     signupGoal: '/signup/goal',
     signupActivityLevel: '/signup/activity-level', 
     profile: '/profile',
+    newWorkout: '/new-workout', 
     workout: '/workout/:id', 
     workouts: '/workouts', 
     login: '/login', 
