@@ -6,7 +6,6 @@ import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
 import Paper from "@mui/material/Paper";
 import { globalContext } from "../../Store/Index";
-import SVGIcon from "../Base/SVGIcon";
 
 const PersonalInfo = () => {
   const { globalState } = useContext(globalContext);

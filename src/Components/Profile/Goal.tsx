@@ -19,7 +19,7 @@ interface GoalProp {
 
 const Goal = ({ headerVariant }: GoalProp) => {
   const { globalState } = useContext(globalContext);
-  const [userProfile, setUserProfile] = React.useState<UserProfile>(
+  const [userProfile] = React.useState<UserProfile>(
     globalState.userProfile
   );
 
