@@ -38,6 +38,7 @@ const App = () => {
               <Route path={Routers.login} element={<Login />} />
               <Route path={Routers.default} element={<Default />} />
               <Route path={Routers.macros} element={<Macros />} />
+              <Route path="/" element={<Login />} />
             </Routes>
           </Box>
         </LocalizationProvider>

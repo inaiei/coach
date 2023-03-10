@@ -1,5 +1,5 @@
 const Routers = {
-    default: '/', 
+    default: '/default', 
     signup: '/signup',
     signupContact:  '/signup/contact',
     signupPersonalInfo: '/signup/personal-info',  
