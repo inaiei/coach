@@ -20,12 +20,16 @@ import WorkoutsPage from "./WorkoutsPage";
 import Macros from "./Macros";
 import NewWorkoutPage from "./NewWorkoutPage";
 import NotFound from "./NotFound";
+import Error from "./Error";
 
 const App = () => {
   return (
     <GlobalStore>
       <ThemeProvider theme={theme}>
         <CssBaseline />
+
+        <Error />
+
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <Box sx={{ padding: { xs: 0, sm: 2 } }}>
               <Routes>

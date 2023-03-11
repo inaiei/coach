@@ -5,6 +5,7 @@ export interface GlobalStateInterface {
   isUserAuthenticated: boolean;
   userProfile: UserProfile;
   persistenceType: string;
+  error: string;
 }
 
 export type ActionType = {

@@ -66,6 +66,7 @@ export function GlobalStore({
 export const globalContext = createContext({} as ContextType);
 
 export const initialState: GlobalStateInterface = {
+  error: "", 
   isUserAuthenticated: false,
   userProfile: {
     email: "",
