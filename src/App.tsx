@@ -19,20 +19,30 @@ import WorkoutPage from "./WorkoutPage";
 import WorkoutsPage from "./WorkoutsPage";
 import Macros from "./Macros";
 import NewWorkoutPage from "./NewWorkoutPage";
+import NotFound from "./NotFound";
 
 const App = () => {
   return (
-      <GlobalStore>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <LocalizationProvider dateAdapter={AdapterMoment}>
-            <Box sx={{ padding: { xs: 0, sm: 2 } }}>
+    <GlobalStore>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <LocalizationProvider dateAdapter={AdapterMoment}>
+          <Box sx={{ padding: { xs: 0, sm: 2 } }}>
               <Routes>
                 <Route path={Routers.signup} element={<SignUp />} />
-                <Route path={Routers.signupContact} element={<SignUpContactDetails />} />
-                <Route path={Routers.signupPersonalInfo} element={<SignUpPersonalInfo />} />
+                <Route
+                  path={Routers.signupContact}
+                  element={<SignUpContactDetails />}
+                />
+                <Route
+                  path={Routers.signupPersonalInfo}
+                  element={<SignUpPersonalInfo />}
+                />
                 <Route path={Routers.signupGoal} element={<SignUpGoal />} />
-                <Route path={Routers.signupActivityLevel} element={<SignUpActivityLevel />}/>
+                <Route
+                  path={Routers.signupActivityLevel}
+                  element={<SignUpActivityLevel />}
+                />
                 <Route path={Routers.profile} element={<Profile />} />
                 <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
                 <Route path={Routers.workout} element={<WorkoutPage />} />
@@ -41,11 +51,12 @@ const App = () => {
                 <Route path={Routers.default} element={<Default />} />
                 <Route path={Routers.macros} element={<Macros />} />
                 <Route path="/" element={<Login />} />
+                <Route path="*" element={<NotFound />} />
               </Routes>
-            </Box>
-          </LocalizationProvider>
-        </ThemeProvider>
-      </GlobalStore>
+          </Box>
+        </LocalizationProvider>
+      </ThemeProvider>
+    </GlobalStore>
   );
 };
 
