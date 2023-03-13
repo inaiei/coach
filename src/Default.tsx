@@ -1,7 +1,8 @@
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext } from "react";
 import CardSelector from "./Components/Base/CardSelector";
-import MyWorkouts from "./Components/Workouts/MyWorkouts";
+import MacroProtions from "./Components/Macros/MacroProtions";
+import WorkoutOfTheDay from "./Components/Workouts/WorkoutOfTheDay";
 import { mainMenu } from "./Data/MainMenu";
 import DefaultContainer from "./DefaultContainer";
 import { globalContext } from "./Store/Index";
@@ -17,7 +18,13 @@ const Default = () => {
             Workout of the day
           </Typography>
 
-          <MyWorkouts />
+          <WorkoutOfTheDay />
+
+          <Typography component="h1" variant="h5" align="center">
+            Tracking daily portions
+          </Typography>
+
+          <MacroProtions />
         </Fragment>
       ) : (
         <Fragment>

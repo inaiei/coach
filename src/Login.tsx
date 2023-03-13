@@ -18,13 +18,16 @@ const Login = () => {
   const { dispatch } = React.useContext(globalContext);
 
   const [email, setEmail] = React.useState<string>("");
-//  const [password, setPassword] = React.useState<string>("");
-
+  //  const [password, setPassword] = React.useState<string>("");
 
   const onLogin = async () => {
     await getProfile(email).then((userProfiles) => {
-      dispatch({ type: "SET_USER_PROFILE", payload: userProfiles[0] });
-      navigate(Routers.default);
+      if (userProfiles.length) {
+        dispatch({ type: "SET_USER_PROFILE", payload: userProfiles[0] });
+        navigate(Routers.default);
+      } else {
+        dispatch({ type: "SET_ERROR", payload: `User doesnt exist` });
+      }
     });
   };
 
@@ -49,7 +52,7 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 value={email}
-                onChange={ e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 autoFocus
               />
             </Grid>

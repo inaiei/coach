@@ -27,36 +27,34 @@ const App = () => {
     <GlobalStore>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
-        <Error />
-
         <LocalizationProvider dateAdapter={AdapterMoment}>
           <Box sx={{ padding: { xs: 0, sm: 2 } }}>
-              <Routes>
-                <Route path={Routers.signup} element={<SignUp />} />
-                <Route
-                  path={Routers.signupContact}
-                  element={<SignUpContactDetails />}
-                />
-                <Route
-                  path={Routers.signupPersonalInfo}
-                  element={<SignUpPersonalInfo />}
-                />
-                <Route path={Routers.signupGoal} element={<SignUpGoal />} />
-                <Route
-                  path={Routers.signupActivityLevel}
-                  element={<SignUpActivityLevel />}
-                />
-                <Route path={Routers.profile} element={<Profile />} />
-                <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
-                <Route path={Routers.workout} element={<WorkoutPage />} />
-                <Route path={Routers.workouts} element={<WorkoutsPage />} />
-                <Route path={Routers.login} element={<Login />} />
-                <Route path={Routers.default} element={<Default />} />
-                <Route path={Routers.macros} element={<Macros />} />
-                <Route path="/" element={<Login />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+            <Error />
+            <Routes>
+              <Route path={Routers.signup} element={<SignUp />} />
+              <Route
+                path={Routers.signupContact}
+                element={<SignUpContactDetails />}
+              />
+              <Route
+                path={Routers.signupPersonalInfo}
+                element={<SignUpPersonalInfo />}
+              />
+              <Route path={Routers.signupGoal} element={<SignUpGoal />} />
+              <Route
+                path={Routers.signupActivityLevel}
+                element={<SignUpActivityLevel />}
+              />
+              <Route path={Routers.profile} element={<Profile />} />
+              <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
+              <Route path={Routers.workout} element={<WorkoutPage />} />
+              <Route path={Routers.workouts} element={<WorkoutsPage />} />
+              <Route path={Routers.login} element={<Login />} />
+              <Route path={Routers.default} element={<Default />} />
+              <Route path={Routers.macros} element={<Macros />} />
+              <Route path="/" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
           </Box>
         </LocalizationProvider>
       </ThemeProvider>
