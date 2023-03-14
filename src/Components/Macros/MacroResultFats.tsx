@@ -28,20 +28,18 @@ const MacroResultProtein = ({
             <span style={{ color: macroColors.fat }}>For example </span> Olive
             oil, Walnuts, Guacamole, Flax seeds
           </Typography>
-        </Grid>
-      </Grid>
 
-      <Grid item xs={12}>
-        <Box sx={{ minHeight: "65px" }}>
-          {[...Array(fatHandSize)].map((index) => (
-            <SVGIcon
-              key={index}
-              url="/Images/tick-square.svg"
-              width="14"
-              style={{ float: "left" }}
-            />
-          ))}
-        </Box>
+          <Box sx={{ minHeight: "65px" }}>
+            {[...Array(fatHandSize)].map((index) => (
+              <SVGIcon
+                key={index}
+                url="/Images/tick-square.svg"
+                width="14"
+                style={{ float: "left" }}
+              />
+            ))}
+          </Box>
+        </Grid>
       </Grid>
     </Grid>
   );

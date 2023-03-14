@@ -29,20 +29,18 @@ const MacroResultProtein = ({
             <span style={{ color: macroColors.carbs }}>For example </span>{" "}
             Beans, Blueberries, Sweet potatoes, Oats
           </Typography>
-        </Grid>
-      </Grid>
 
-      <Grid item xs={12}>
-        <Box sx={{ minHeight: "65px" }}>
-          {[...Array(carbsHandSize)].map((index) => (
-            <SVGIcon
-              key={index}
-              url="/Images/tick-square-done.svg"
-              width="14"
-              style={{ float: "left" }}
-            />
-          ))}
-        </Box>
+          <Box sx={{ minHeight: "65px" }}>
+            {[...Array(carbsHandSize)].map((index) => (
+              <SVGIcon
+                key={index}
+                url="/Images/tick-square-done.svg"
+                width="14"
+                style={{ float: "left" }}
+              />
+            ))}
+          </Box>
+        </Grid>
       </Grid>
     </Grid>
   );

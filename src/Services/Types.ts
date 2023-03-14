@@ -24,6 +24,7 @@ export interface UserProfile {
     activityLevel?: ActivityLevel;
     goal?: SelectorItem;
     workouts?: Workout[];
+    macros: Macros[]; 
 }
 
 export type Workout = {
@@ -40,4 +41,12 @@ export type Workout = {
     description: string;
     video: string;
     completed: boolean;
+  }
+
+  export type Macros = {
+    date: string,
+    protein: boolean[],
+    fat: boolean[],
+    veggies: boolean[],
+    carbs: boolean[]
   }

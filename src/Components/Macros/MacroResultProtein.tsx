@@ -1,17 +1,21 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+import { Macros } from "../../Services/Types";
+import Checkbox from "../Base/Checkbox";
 import SVGIcon from "../Base/SVGIcon";
 
 interface MacroResultProteinProp {
   proteinHandSize: number;
   proteinGms: number;
   macroColors: any;
+  macros: Macros;
 }
 const MacroResultProtein = ({
   proteinHandSize,
   proteinGms,
   macroColors,
+  macros,
 }: MacroResultProteinProp) => {
   return (
     <Grid item xs={12}>
@@ -28,19 +32,20 @@ const MacroResultProtein = ({
             <span style={{ color: macroColors.protein }}>For example </span>
             Chicken, Tofu, Fish and Greek yogurt
           </Typography>
+
+          <Box sx={{ minHeight: "65px" }}>
+            {macros.protein.map((portion, index) => (
+              <Checkbox
+                key={index}
+                selected={portion}
+                onChange={(newValue) => {
+                  // dailyMacro[index] = newValue;
+                  // setDailyMacro(dailyMacro)
+                }}
+              />
+            ))}
+          </Box>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ minHeight: "65px" }}>
-          {[...Array(proteinHandSize)].map((index) => (
-            <SVGIcon
-              key={index}
-              url="/Images/tick-square.svg"
-              width="14"
-              style={{ float: "left" }}
-            />
-          ))}
-        </Box>
       </Grid>
     </Grid>
   );

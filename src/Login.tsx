@@ -21,7 +21,7 @@ const Login = () => {
   //  const [password, setPassword] = React.useState<string>("");
 
   const onLogin = async () => {
-    await getProfile(email).then((userProfiles) => {
+    await getProfile(email.toLowerCase()).then((userProfiles) => {
       if (userProfiles.length) {
         dispatch({ type: "SET_USER_PROFILE", payload: userProfiles[0] });
         navigate(Routers.default);

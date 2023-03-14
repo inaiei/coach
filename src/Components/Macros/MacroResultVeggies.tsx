@@ -26,19 +26,18 @@ const MacroResultVeggies = ({
             <span style={{ color: macroColors.veggies }}>For example </span>{" "}
             Spinach, Carrots, Cauliflower, Tomatoes
           </Typography>
+
+          <Box sx={{ minHeight: "65px" }}>
+            {[...Array(veggiesHandSize)].map((index) => (
+              <SVGIcon
+                key={index}
+                url="/Images/tick-square.svg"
+                width="14"
+                style={{ float: "left" }}
+              />
+            ))}
+          </Box>
         </Grid>
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ minHeight: "65px" }}>
-          {[...Array(veggiesHandSize)].map((index) => (
-            <SVGIcon
-              key={index}
-              url="/Images/tick-square.svg"
-              width="14"
-              style={{ float: "left" }}
-            />
-          ))}
-        </Box>
       </Grid>
     </Grid>
   );

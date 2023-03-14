@@ -1,31 +1,14 @@
 import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { useContext } from "react";
-import useMacroProportions, {
-  handSizeRatios,
+import {
   macroColors,
   macroRatios,
 } from "../../Hooks/useMacroProportions";
-import { globalContext } from "../../Store/Index";
 import MacroProtions from "./MacroProtions";
-import MacroResultCarb from "./MacroResultCarb";
-import MacroResultFats from "./MacroResultFats";
-import MacroResultProtein from "./MacroResultProtein";
-import MacroResultVeggies from "./MacroResultVeggies";
 
 const MacroResults = () => {
-  const { globalState } = useContext(globalContext);
-  const {
-    proteinGms,
-    carbsGms,
-    fatGms,
-    proteinHandSize,
-    carbsHandSize,
-    fatHandSize,
-  } = useMacroProportions(globalState.userProfile);
 
   return (
     <Box sx={{ mt: 1 }}>
