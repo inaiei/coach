@@ -118,14 +118,8 @@ export default createTheme({
         {
           props: { variant: "cardTitle" },
           style: {
-            margin: 0,
             fontWeight: "600",
             fontSize: "0.9rem",
-            lineHeight: "1.334",
-            letterSpacing: "0em",
-            textAlign: "center",
-            marginBottom: "0.35em",
-            paddingTop: "15px",
           },
         },
       ],

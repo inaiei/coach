@@ -3,19 +3,28 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ContactDetails from "../Profile/ContactDetails";
 import Routers from "../../Routers";
+import { Method, useFetch } from "../../Hooks/useFetch";
+import { useContext, useState } from "react";
+import { globalContext } from "../../Store/Index";
+import { UserProfile } from "../../Services/Types";
+import { endpoints } from "../../Services/Endpoints";
 
 const SignUpContactDetails = () => {
   const navigate = useNavigate();
+  const fetch = useFetch();
 
-  // const { globalState, dispatch } = useContext(globalContext);
+  const { dispatch } = useContext(globalContext);
+  const { globalState } = useContext(globalContext);
 
-  const handleSubmit = async () => {
-    navigate(Routers.signupPersonalInfo);
+  const [userProfile, setUserProfile] = useState<UserProfile>(
+    globalState.userProfile
+  );
 
-    // await saveProfile(userProfile).then(() => {
-    //   dispatch({ type: "SAVE_USER_PROFILE", payload: userProfile });
-    //   navigate(Routers.profile);
-    // });
+  const onNext = async () => {
+    fetch(endpoints.saveProfile, Method.Post, userProfile).then(() => {
+      dispatch({ type: "SET_USER_PROFILE", payload: userProfile });
+      navigate(Routers.signupPersonalInfo);
+    });
   };
 
   return (
@@ -24,14 +33,14 @@ const SignUpContactDetails = () => {
         maxWidth="xs"
         sx={{ bgcolor: "common.white", borderRadius: "15px" }}
       >
-        <ContactDetails />
+        <ContactDetails userProfile={userProfile} setUserProfile={setUserProfile}/>
 
         <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
-            onClick={handleSubmit}
+            onClick={onNext}
           >
             Next
           </Button>

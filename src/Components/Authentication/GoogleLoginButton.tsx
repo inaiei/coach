@@ -5,11 +5,14 @@ import { GoogleLogin } from "@react-oauth/google";
 import { useContext } from "react";
 import { globalContext } from "../../Store/Index";
 import { GoogleProfile } from "../../Services/Types";
-import { getProfile } from "../../Services/ProfileService";
 import Routers from "../../Routers";
+import { Method, useFetch } from "../../Hooks/useFetch";
+import { endpoints } from "../../Services/Endpoints";
 
 const GoogleLoginButton = () => {
   const navigate = useNavigate();
+  const fetch = useFetch();
+
   const { dispatch } = useContext(globalContext);
   const googleClientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 
@@ -28,7 +31,10 @@ const GoogleLoginButton = () => {
           const profile: GoogleProfile = jwt_decode(
             credentialResponse.credential || ""
           );
-          await getProfile(profile.email).then((userProfile) => {
+          await fetch(
+            endpoints.getProfile.replace(":email", profile.email),
+            Method.Get
+          ).then((userProfile) => {
             dispatch({ type: "SET_USER_PROFILE", payload: userProfile });
             navigate(Routers.default);
           });

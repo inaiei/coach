@@ -8,20 +8,25 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import FacebookLoginButton from "./Components/Authentication/FacebookLoginButton";
 import GoogleLoginButton from "./Components/Authentication/GoogleLoginButton";
-import { getProfile } from "./Services/ProfileService";
 import { globalContext } from "./Store/Index";
 import Routers from "./Routers";
 import Link from "@mui/material/Link";
+import { Method, useFetch } from "./Hooks/useFetch";
+import { endpoints } from "./Services/Endpoints";
 
 const Login = () => {
   const navigate = useNavigate();
   const { dispatch } = React.useContext(globalContext);
+  const fetch = useFetch();
 
   const [email, setEmail] = React.useState<string>("");
   //  const [password, setPassword] = React.useState<string>("");
 
   const onLogin = async () => {
-    await getProfile(email.toLowerCase()).then((userProfiles) => {
+    await fetch(
+      endpoints.getProfile.replace(":email", email.toLowerCase()),
+      Method.Get
+    ).then((userProfiles) => {
       if (userProfiles.length) {
         dispatch({ type: "SET_USER_PROFILE", payload: userProfiles[0] });
         navigate(Routers.default);

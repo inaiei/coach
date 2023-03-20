@@ -66,20 +66,29 @@ export function GlobalStore({
 export const globalContext = createContext({} as ContextType);
 
 export const initialState: GlobalStateInterface = {
-  error: "", 
+  error: "",
   isUserAuthenticated: false,
   userProfile: {
     email: "",
+    password: "",
     name: "",
+    mobile: "",
     picture: "",
-    country: undefined,
+    country: {
+      name: "Australia",
+      phoneCode: "+61",
+      iso: "AU",
+    },
     gender: "",
+    age: 18,
     height: 150,
-    age: 0,
+    heightUnit: "cm",
     weight: 0,
+    weightUnit: "kg",
+    activityLevel: undefined,
+    goal: undefined,
     workouts: undefined,
-    activityLevel: undefined, 
-    goal: undefined
+    macros: undefined,
   } as UserProfile,
   persistenceType: "sessionStorage",
 };

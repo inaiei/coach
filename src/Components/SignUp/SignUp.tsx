@@ -16,19 +16,31 @@ import GoogleSignUpButton from "./GoogleSignUpButton";
 import FacebookSignUpButton from "./FacebookSignUpButton";
 import Link from "@mui/material/Link";
 import Routers from "../../Routers";
+import { useContext } from "react";
+import { globalContext } from "../../Store/Index";
+import { UserProfile } from "../../Services/Types";
+import { countries } from "../../Data/Countries";
+import { Method, useFetch } from "../../Hooks/useFetch";
+import { endpoints } from "../../Services/Endpoints";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const fetch = useFetch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    // event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+  const { dispatch } = React.useContext(globalContext);
+  const { globalState } = useContext(globalContext);
 
-    navigate(Routers.signupPersonalInfo);
+  const [termsAndConditions, setTermsAndConditions] =
+    React.useState<boolean>(false);
+  const [userProfile, setUserProfile] = React.useState<UserProfile>(
+    globalState.userProfile
+  );
+
+  const onSubmit = () => {
+    fetch(endpoints.saveProfile, Method.Post, userProfile).then(() => {
+      dispatch({ type: "SET_USER_PROFILE", payload: userProfile });
+      navigate(Routers.signupPersonalInfo);
+    });
   };
 
   return (
@@ -56,7 +68,7 @@ const SignUp = () => {
           or
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
+        <Box component="div" sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -67,6 +79,10 @@ const SignUp = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={userProfile.email}
+                onChange={(e) => {
+                  setUserProfile({ ...userProfile, email: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -78,6 +94,10 @@ const SignUp = () => {
                 type="password"
                 id="password"
                 autoComplete="new-password"
+                value={userProfile.password}
+                onChange={(e) => {
+                  setUserProfile({ ...userProfile, password: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -88,6 +108,10 @@ const SignUp = () => {
                 fullWidth
                 id="name"
                 label="Name"
+                value={userProfile.name}
+                onChange={(e) => {
+                  setUserProfile({ ...userProfile, name: e.target.value });
+                }}
               />
             </Grid>
             <Grid item xs={6} sm={4}>
@@ -98,21 +122,37 @@ const SignUp = () => {
                   labelId="country-label"
                   id="country"
                   label="Country"
+                  value={userProfile?.country?.iso}
+                  onChange={(e) => {
+                    const selectCountry = countries.find(
+                      (country) => country.iso === e.target.value
+                    );
+                    setUserProfile({
+                      ...userProfile,
+                      country: selectCountry,
+                    });
+                  }}
                 >
-                  <MenuItem value={"M"}>Australia</MenuItem>
-                  <MenuItem value={"F"}>Brazil</MenuItem>
-                  <MenuItem value={"O"}>Other</MenuItem>
+                  {countries.map((country) => (
+                    <MenuItem value={country.iso} key={country.iso}>
+                      {country.iso}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Grid>
             <Grid item xs={6} sm={8}>
               <TextField
-                autoComplete="phoneNumber"
-                name="phoneNumber"
+                autoComplete="mobile"
+                name="mobile"
                 required
                 fullWidth
-                id="phoneNumber"
-                label="Phone number"
+                id="mobile"
+                label="Mobile"
+                value={userProfile.mobile}
+                onChange={(e) => {
+                  setUserProfile({ ...userProfile, mobile: e.target.value });
+                }}
               />
             </Grid>
 
@@ -120,35 +160,39 @@ const SignUp = () => {
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I agree to the terms and conditions."
+                value={termsAndConditions}
+                onChange={(e) => {
+                  setTermsAndConditions(!termsAndConditions);
+                }}
               />
             </Grid>
           </Grid>
+
           <Button
             type="submit"
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={onSubmit}
           >
             Sign Up
           </Button>
-          <Grid container justifyContent="flex-end">
-            <Grid item></Grid>
-          </Grid>
+
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            align="center"
+            sx={{ mt: 5 }}
+          >
+            Already have an account? &nbsp;
+            <Link component={RouterLink} to="/" variant="body2">
+              Sign in
+            </Link>
+          </Typography>
         </Box>
       </Container>
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        sx={{ mt: 5 }}
-      >
-        Already have an account? &nbsp;
-        <Link component={RouterLink} to="/" variant="body2">
-          Sign in
-        </Link>
-      </Typography>
     </React.Fragment>
   );
-}
+};
 
 export default SignUp;

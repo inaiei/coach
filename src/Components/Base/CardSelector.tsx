@@ -3,30 +3,34 @@ import { useNavigate } from "react-router-dom";
 import { SelectorItem } from "../../Data/Types";
 import CardSelectorItem from "./CardSelectorItem";
 
-interface CardSelectorProp {
-  items: SelectorItem[];
-  xs?: number;
-  sm?: number;
-  md?: number;
-  selectedItem?: SelectorItem
+export enum CardSelectorPosition {
+  Top,
+  Left,
 }
 
-const CardSelector = ({ items, xs, sm, md, selectedItem }: CardSelectorProp) => {
+interface CardSelectorProp {
+  items: SelectorItem[];
+  selectedItem?: SelectorItem;
+  position?: CardSelectorPosition;
+  onChange?: (newValue?: SelectorItem) => void;
+}
+
+const CardSelector = ({ items, selectedItem, position, onChange }: CardSelectorProp) => {
   const navigate = useNavigate();
 
-  const onSelected = (item:SelectorItem, isSelected:boolean) => {
+  const onSelected = (item: SelectorItem, isSelected: boolean) => {
     if (item.navigateTo && isSelected) {
       navigate(item.navigateTo);
     }
 
-    if(isSelected && item.id === selectedItem?.id) {
-      selectedItem = undefined;
-    } else if (isSelected) {
-      selectedItem = item
+    if (onChange) {
+      if (isSelected && item.id === selectedItem?.id) {
+        onChange(undefined);
+      } else if (isSelected) {
+        onChange(item);
+      }
     }
-
-    // update the selected value somewhere
-  }
+  };
 
   return (
     <Grid
@@ -37,11 +41,12 @@ const CardSelector = ({ items, xs, sm, md, selectedItem }: CardSelectorProp) => 
       direction="row"
     >
       {items.map((item) => (
-        <Grid item key={item.id} sx={{ width: { xs: "100%", md: '12.5rem' } }}>
+        <Grid item key={item.id} sx={{ width: { xs: "100%" } }}>
           <CardSelectorItem
             item={item}
             isSelected={item.id === selectedItem?.id}
             onSelect={onSelected}
+            position={position}
           />
         </Grid>
       ))}

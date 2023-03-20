@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Macros } from '../Services/Types';
 
 
-const useTrackDailyMacro = (macros: Macros[], proteinPortions: number, veggiesPortions: number, carbsPortions: number, fatPortions: number) => {
+const useTrackDailyMacro = (macros?: Macros[], proteinPortions?: number, veggiesPortions?: number, carbsPortions?: number, fatPortions?: number) => {
   let today = new Date();
   const offset = today.getTimezoneOffset()
   today = new Date(today.getTime() - (offset * 60 * 1000))

@@ -11,6 +11,7 @@ export interface GoogleProfile {
 
 export interface UserProfile {
     email: string,
+    password: string, 
     name: string;
     picture: string;
     country?: Country;
@@ -24,7 +25,7 @@ export interface UserProfile {
     activityLevel?: ActivityLevel;
     goal?: SelectorItem;
     workouts?: Workout[];
-    macros: Macros[]; 
+    macros?: Macros[]; 
 }
 
 export type Workout = {

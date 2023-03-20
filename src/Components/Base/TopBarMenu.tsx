@@ -59,6 +59,7 @@ const TopBarMenu = () => {
     <AppBar position="static">
       <Container maxWidth="md">
         <Toolbar disableGutters>
+          
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Link
             to={Routers.default}
@@ -128,6 +129,20 @@ const TopBarMenu = () => {
               ))}
             </Menu>
           </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page.name}
+                onClick={() => {
+                  handleClickMenuItem(page);
+                }}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page.name}
+              </Button>
+            ))}
+          </Box>
+
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
           <Link
             to={Routers.default}
@@ -153,19 +168,6 @@ const TopBarMenu = () => {
               LOGO
             </Typography>
           </Link>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={() => {
-                  handleClickMenuItem(page);
-                }}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page.name}
-              </Button>
-            ))}
-          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

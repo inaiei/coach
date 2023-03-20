@@ -1,6 +1,6 @@
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext } from "react";
-import CardSelector from "./Components/Base/CardSelector";
+import CardSelector, { CardSelectorPosition } from "./Components/Base/CardSelector";
 import MacroProtions from "./Components/Macros/MacroProtions";
 import WorkoutOfTheDay from "./Components/Workouts/WorkoutOfTheDay";
 import { mainMenu } from "./Data/MainMenu";
@@ -31,7 +31,7 @@ const Default = () => {
           <Typography component="h1" variant="h5" align="center">
             Let's get started
           </Typography>
-          <CardSelector items={mainMenu} md={4} />
+          <CardSelector items={mainMenu} position={CardSelectorPosition.Top} />
         </Fragment>
       )}
     </DefaultContainer>

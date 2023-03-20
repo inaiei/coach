@@ -1,5 +1,4 @@
 import React from "react";
-import { useContext } from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -10,17 +9,18 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { globalContext } from "../../Store/Index";
+import { countries } from "../../Data/Countries";
 import { UserProfile } from "../../Services/Types";
-import {countries} from "../../Data/Countries";
 
-const ContactDetails = () => {
-  const { globalState } = useContext(globalContext);
-  const [userProfile] = React.useState<UserProfile>(
-    globalState.userProfile
-  );
+interface ContactDetailsProp {
+  userProfile: UserProfile;
+  setUserProfile: (userProfile: UserProfile) => void;
+}
 
-
+const ContactDetails = ({
+  userProfile,
+  setUserProfile,
+}: ContactDetailsProp) => {
   return (
     <Box component="form" noValidate sx={{ mt: 1 }}>
       <Box
@@ -52,6 +52,9 @@ const ContactDetails = () => {
             autoComplete="name"
             value={userProfile?.name}
             autoFocus
+            onChange={(e) => {
+              setUserProfile({ ...userProfile, name: e.target.value });
+            }}
           />
         </Grid>
         <Grid item xs={12}>
@@ -63,6 +66,9 @@ const ContactDetails = () => {
             id="email"
             autoComplete="email"
             value={userProfile?.email}
+            onChange={(e) => {
+              setUserProfile({ ...userProfile, email: e.target.value });
+            }}
           />
         </Grid>
         <Grid item xs={4}>
@@ -73,9 +79,21 @@ const ContactDetails = () => {
               labelId="country-label"
               id="country"
               label="Country"
+              value={userProfile?.country?.iso}
+              onChange={(e) => {
+                const selectCountry = countries.find(
+                  (country) => country.iso === e.target.value
+                );
+                setUserProfile({
+                  ...userProfile,
+                  country: selectCountry,
+                });
+              }}
             >
               {countries.map((country) => (
-                <MenuItem value={country.iso} key={country.iso} selected={userProfile?.country?.iso === country.iso}>{country.iso}</MenuItem>
+                <MenuItem value={country.iso} key={country.iso}>
+                  {country.iso}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -89,11 +107,14 @@ const ContactDetails = () => {
             id="mobile"
             autoComplete="mobile"
             value={userProfile?.mobile}
+            onChange={(e) => {
+              setUserProfile({ ...userProfile, mobile: e.target.value });
+            }}
           />
         </Grid>
       </Grid>
     </Box>
   );
-}
+};
 
-export default ContactDetails
+export default ContactDetails;

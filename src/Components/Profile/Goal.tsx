@@ -6,30 +6,31 @@ import { Variant } from "@mui/material/styles/createTypography";
 import { OverridableStringUnion } from "@mui/types";
 import { goals } from "../../Data/Goals";
 import CardSelector from "../Base/CardSelector";
-import React, { useContext } from "react";
 import { UserProfile } from "../../Services/Types";
-import { globalContext } from "../../Store/Index";
 
 interface GoalProp {
   headerVariant?: OverridableStringUnion<
     Variant | "inherit",
     TypographyPropsVariantOverrides
   >;
+  userProfile: UserProfile;
+  setUserProfile: (userProfile: UserProfile) => void;
 }
 
-const Goal = ({ headerVariant }: GoalProp) => {
-  const { globalState } = useContext(globalContext);
-  const [userProfile] = React.useState<UserProfile>(
-    globalState.userProfile
-  );
-
+const Goal = ({ headerVariant, userProfile, setUserProfile }: GoalProp) => {
   return (
     <Box component="form" noValidate sx={{ mt: 1 }}>
       <Typography component="h1" variant={headerVariant || "h6"} align="center">
         Goal
       </Typography>
 
-      <CardSelector items={goals} selectedItem={userProfile.goal}/>
+      <CardSelector
+        items={goals}
+        selectedItem={userProfile.goal}
+        onChange={(newValue) => {
+          setUserProfile({ ...userProfile, goal: newValue });
+        }}
+      />
     </Box>
   );
 };

@@ -5,8 +5,6 @@ import { TypographyPropsVariantOverrides } from "@mui/material/Typography";
 import { OverridableStringUnion } from "@mui/types";
 import CardSelector from "../Base/CardSelector";
 import { activityLevel } from "../../Data/ActivityLevel";
-import { useContext } from "react";
-import { globalContext } from "../../Store/Index";
 import { UserProfile } from "../../Services/Types";
 import React from "react";
 
@@ -15,21 +13,28 @@ interface ActivityLevelProp {
     Variant | "inherit",
     TypographyPropsVariantOverrides
   >;
+  userProfile: UserProfile;
+  setUserProfile: (userProfile: UserProfile) => void;
 }
 
-const ActivityLevel = ({ headerVariant }: ActivityLevelProp) => {
-  const { globalState } = useContext(globalContext);
-  const [userProfile] = React.useState<UserProfile>(
-    globalState.userProfile
-  );
-
+const ActivityLevel = ({
+  headerVariant,
+  userProfile,
+  setUserProfile,
+}: ActivityLevelProp) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Typography component="h1" variant={headerVariant || "h6"} align="center">
         Activity Level
       </Typography>
 
-      <CardSelector items={activityLevel} selectedItem={userProfile.activityLevel}/>
+      <CardSelector
+        items={activityLevel}
+        selectedItem={userProfile.activityLevel}
+        onChange={(newValue: any) => {
+          setUserProfile({ ...userProfile, activityLevel: newValue });
+        }}
+      />
     </Box>
   );
 };

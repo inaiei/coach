@@ -8,16 +8,18 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Routers from "../../Routers";
-import { getWorkouts } from "../../Services/WorkoutService";
 import { Workout } from "../../Services/Types";
+import { Method, useFetch } from "../../Hooks/useFetch";
+import { endpoints } from "../../Services/Endpoints";
 
 const Workouts = () => {
   const navigate = useNavigate();
+  const fetch = useFetch();
   const [workouts, setWorkouts] = useState<any>(undefined);
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      await getWorkouts().then((workouts) => {
+      await fetch(endpoints.getWorkouts, Method.Get).then((workouts) => {
         setWorkouts(workouts);
       });
     };
@@ -27,7 +29,7 @@ const Workouts = () => {
 
   return (
     <List sx={{ width: "100%" }}>
-      {workouts?.map((workout:Workout, index:number) => (
+      {workouts?.map((workout: Workout, index: number) => (
         <Fragment key={"session-" + index}>
           <ListItem
             alignItems="flex-start"

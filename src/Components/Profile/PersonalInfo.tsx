@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography, { TypographyPropsVariantOverrides } from "@mui/material/Typography";
+import Typography, {
+  TypographyPropsVariantOverrides,
+} from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MaleIcon from "@mui/icons-material/Male";
 import FemaleIcon from "@mui/icons-material/Female";
@@ -10,20 +12,23 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { Variant } from "@mui/material/styles/createTypography";
 import { OverridableStringUnion } from "@mui/types";
-import { globalContext } from "../../Store/Index";
 import { UserProfile } from "../../Services/Types";
 import { AntSwitch } from "../Base/AntSwitch";
 
 interface PersonalInfoProp {
-  headerVariant?: OverridableStringUnion<Variant | 'inherit', TypographyPropsVariantOverrides>;
+  headerVariant?: OverridableStringUnion<
+    Variant | "inherit",
+    TypographyPropsVariantOverrides
+  >;
+  userProfile: UserProfile;
+  setUserProfile: (userProfile: UserProfile) => void;
 }
 
-const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
-  const { globalState } = useContext(globalContext);
-  const [userProfile, setUserProfile] = React.useState<UserProfile>(
-    globalState.userProfile
-  );
-
+const PersonalInfo = ({
+  headerVariant,
+  userProfile,
+  setUserProfile,
+}: PersonalInfoProp) => {
   return (
     <Box component="form" noValidate sx={{ mt: 1 }}>
       <Typography component="h1" variant={headerVariant || "h6"} align="center">
@@ -42,7 +47,15 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
         >
           <Paper
             elevation={3}
-            sx={{ width: 130, textAlign: "center", float: "left", backgroundColor: userProfile.gender === "M" ? "#639fe0" : "#fff" }}
+            sx={{
+              width: 130,
+              textAlign: "center",
+              float: "left",
+              backgroundColor: userProfile.gender === "M" ? "#639fe0" : "#fff",
+            }}
+            onClick={() => {
+              setUserProfile({ ...userProfile, gender: "M" });
+            }}
           >
             <MaleIcon sx={{ fontSize: 85 }} />
             <Typography component="p" align="center">
@@ -61,7 +74,15 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
         >
           <Paper
             elevation={3}
-            sx={{ width: 130, textAlign: "center", float: "left", backgroundColor: userProfile.gender === "F" ? "#639fe0" : "#fff" }}
+            sx={{
+              width: 130,
+              textAlign: "center",
+              float: "left",
+              backgroundColor: userProfile.gender === "F" ? "#639fe0" : "#fff",
+            }}
+            onClick={() => {
+              setUserProfile({ ...userProfile, gender: "F" });
+            }}
           >
             <FemaleIcon sx={{ fontSize: 85 }} />
             <Typography component="p" align="center">
@@ -106,8 +127,14 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
             >
               <Typography>ft</Typography>
               <AntSwitch
-                defaultChecked
-                inputProps={{ "aria-label": "ant design" }}
+                checked={userProfile.heightUnit === "cm"}
+                inputProps={{ "aria-label": "Height unit" }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  setUserProfile({
+                    ...userProfile,
+                    heightUnit: event.target.checked ? "cm" : "ft",
+                  });
+                }}
               />
               <Typography>cm</Typography>
             </Stack>
@@ -129,7 +156,10 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
               },
             }}
             value={userProfile.age}
-            />
+            onChange={(e) => {
+              setUserProfile({ ...userProfile, age: Number(e.target.value) });
+            }}
+          />
         </Grid>
         <Grid item xs={6} sx={{ position: "relative" }}>
           <TextField
@@ -147,7 +177,13 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
               },
             }}
             value={userProfile.weight}
-            />
+            onChange={(e) => {
+              setUserProfile({
+                ...userProfile,
+                weight: Number(e.target.value),
+              });
+            }}
+          />
           <Stack
             direction="row"
             spacing={1}
@@ -156,15 +192,21 @@ const PersonalInfo = ({ headerVariant }: PersonalInfoProp) => {
           >
             <Typography>lbs</Typography>
             <AntSwitch
-              defaultChecked
-              inputProps={{ "aria-label": "ant design" }}
-            />
+              checked={userProfile.weightUnit === "kg"}
+              inputProps={{ "aria-label": "Weight unit" }}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setUserProfile({
+                  ...userProfile,
+                  weightUnit: event.target.checked ? "kg" : "lbs",
+                });
+              }}
+          />
             <Typography>kg</Typography>
           </Stack>
         </Grid>
       </Grid>
     </Box>
   );
-}
+};
 
 export default PersonalInfo;
