@@ -66,9 +66,15 @@ export function GlobalStore({
 export const globalContext = createContext({} as ContextType);
 
 export const initialState: GlobalStateInterface = {
+  activityLevels: [],
+  goals: [],
+  sessions: [],
+  workouts: [],
+  programs: [],
   error: "",
   isUserAuthenticated: false,
   userProfile: {
+    id: "",
     email: "",
     password: "",
     name: "",
@@ -85,10 +91,10 @@ export const initialState: GlobalStateInterface = {
     heightUnit: "cm",
     weight: 0,
     weightUnit: "kg",
-    activityLevel: undefined,
-    goal: undefined,
-    workouts: undefined,
-    macros: undefined,
+    activityLevelId: undefined,
+    goalId: undefined,
+    workouts: [],
+    macros: [] ,
   } as UserProfile,
   persistenceType: "sessionStorage",
 };

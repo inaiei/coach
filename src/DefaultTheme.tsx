@@ -17,6 +17,13 @@ declare module "@mui/material/Typography" {
 
 export default createTheme({
   components: {
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        root:{
+          margin: "15px"
+        }
+      }
+    },
     MuiCssBaseline: {
       styleOverrides: `
         @font-face {

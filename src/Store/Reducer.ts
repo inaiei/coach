@@ -13,13 +13,38 @@ const Reducer = (state: GlobalStateInterface, action: ActionType): any => {
         ...state,
         userProfile: action.payload,
       };
+    case 'SET_ACTIVITY_LEVELS':
+      return {
+        ...state,
+        activityLevels: action.payload
+      };
+    case 'SET_GOALS':
+      return {
+        ...state,
+        goals: action.payload
+      };
+    case 'SET_WORKOUT_SESSIONS':
+      return {
+        ...state,
+        sessions: action.payload
+      };
+    case 'SET_WORKOUTS':
+      return {
+        ...state,
+        workouts: action.payload
+      };
+    case 'SET_PROGRAMS':
+      return {
+        ...state,
+        programs: action.payload
+      };
     case 'GOOGLE_SIGNUP':
       return {
         ...state,
         userProfile: {
-          ...state.userProfile, 
-          email: action.payload.email, 
-          name: action.payload.name, 
+          ...state.userProfile,
+          email: action.payload.email,
+          name: action.payload.name,
           picture: action.payload.picture
         },
       };

@@ -15,40 +15,48 @@ const MyWorkouts = () => {
   const { globalState } = useContext(globalContext);
 
   return (
-    <List sx={{ width: "100%" }}>
-      {globalState.userProfile.workouts?.map((workout, index) => (
-        <Fragment key={"session-" + index}>
-          <ListItem
-            alignItems="flex-start"
-            onClick={() => {
-              navigate(Routers.workout.replace(':id', workout.id.toString()));
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar alt={workout.dayOfWeek} src={workout.dayOfWeek} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={workout.title}
-              secondary={
-                <Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {workout.dayOfWeek}
-                  </Typography>
-                  {" - " + workout.description}
-                </Fragment>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-        </Fragment>
-      ))}
-    </List>
+    <Fragment>
+      {/* <Typography component="h1" variant="h5">
+        My workouts
+      </Typography> */}
+
+      <List sx={{ width: "100%" }}>
+        {globalState.userProfile.workouts?.map((workout, index) => (
+          <Fragment key={"session-" + index}>
+            <ListItem
+              alignItems="flex-start"
+              onClick={() => {
+                navigate(Routers.workout.replace(":id", workout.id.toString()));
+              }}
+            >
+              {workout.dayOfWeek && (
+                <ListItemAvatar>
+                  <Avatar alt={workout.dayOfWeek} src={workout.dayOfWeek} />
+                </ListItemAvatar>
+              )}
+              <ListItemText
+                primary={workout.title}
+                secondary={
+                  <Fragment>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {workout.dayOfWeek}
+                    </Typography>
+                    {" - " + workout.description}
+                  </Fragment>
+                }
+              />
+            </ListItem>
+            <Divider component="li" />
+          </Fragment>
+        ))}
+      </List>
+    </Fragment>
   );
-}
+};
 
 export default MyWorkouts;

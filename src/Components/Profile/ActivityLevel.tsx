@@ -4,9 +4,9 @@ import { Variant } from "@mui/material/styles/createTypography";
 import { TypographyPropsVariantOverrides } from "@mui/material/Typography";
 import { OverridableStringUnion } from "@mui/types";
 import CardSelector from "../Base/CardSelector";
-import { activityLevel } from "../../Data/ActivityLevel";
 import { UserProfile } from "../../Services/Types";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { globalContext } from "../../Store/Index";
 
 interface ActivityLevelProp {
   headerVariant?: OverridableStringUnion<
@@ -22,6 +22,18 @@ const ActivityLevel = ({
   userProfile,
   setUserProfile,
 }: ActivityLevelProp) => {
+  const { globalState } = useContext(globalContext);
+  const [selectedActivityLevel, setSelectedActivityLevel] = useState<any>();
+
+  useEffect(() => {
+    setSelectedActivityLevel(
+      globalState.activityLevels.find(
+        (activityLevel) =>
+          activityLevel.id === globalState.userProfile.activityLevelId
+      )
+    );
+  }, [globalState.activityLevels, globalState.userProfile.activityLevelId]);
+
   return (
     <Box sx={{ mt: 1 }}>
       <Typography component="h1" variant={headerVariant || "h6"} align="center">
@@ -29,10 +41,13 @@ const ActivityLevel = ({
       </Typography>
 
       <CardSelector
-        items={activityLevel}
-        selectedItem={userProfile.activityLevel}
+        items={globalState.activityLevels}
+        selectedItem={selectedActivityLevel}
         onChange={(newValue: any) => {
-          setUserProfile({ ...userProfile, activityLevel: newValue });
+          setSelectedActivityLevel(globalState.activityLevels.find(
+            (activityLevel) => activityLevel.id === newValue.id
+          ));
+          setUserProfile({ ...userProfile, activityLevelId: newValue.id });
         }}
       />
     </Box>

@@ -25,6 +25,10 @@ export interface SelectorItem {
     navigateTo?: string;
 }
 
+export interface Goal extends SelectorItem {
+
+}
+
 export interface ActivityLevel extends SelectorItem {
     factor: number;
 }

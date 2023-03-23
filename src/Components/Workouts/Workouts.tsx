@@ -28,39 +28,45 @@ const Workouts = () => {
   });
 
   return (
-    <List sx={{ width: "100%" }}>
-      {workouts?.map((workout: Workout, index: number) => (
-        <Fragment key={"session-" + index}>
-          <ListItem
-            alignItems="flex-start"
-            onClick={() => {
-              navigate(Routers.workout.replace(":id", workout.id.toString()));
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar alt={workout.dayOfWeek} src={workout.dayOfWeek} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={workout.title}
-              secondary={
-                <Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {workout.dayOfWeek}
-                  </Typography>
-                  {" - " + workout.description}
-                </Fragment>
-              }
-            />
-          </ListItem>
-          <Divider component="li" />
-        </Fragment>
-      ))}
-    </List>
+    <Fragment>
+      <Typography component="h1" variant="h5" align="center">
+        Workouts 
+      </Typography>
+
+      <List sx={{ width: "100%" }}>
+        {workouts?.map((workout: Workout, index: number) => (
+          <Fragment key={"session-" + index}>
+            <ListItem
+              alignItems="flex-start"
+              onClick={() => {
+                navigate(Routers.workout.replace(":id", workout.id.toString()));
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar alt={workout.dayOfWeek} src={workout.dayOfWeek} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={workout.title}
+                secondary={
+                  <Fragment>
+                    <Typography
+                      sx={{ display: "inline" }}
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {workout.dayOfWeek}
+                    </Typography>
+                    {" - " + workout.description}
+                  </Fragment>
+                }
+              />
+            </ListItem>
+            <Divider component="li" />
+          </Fragment>
+        ))}
+      </List>
+    </Fragment>
   );
 };
 

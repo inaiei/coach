@@ -1,7 +1,13 @@
 import { Dispatch } from 'react';
-import { UserProfile } from '../Services/Types';
+import { ActivityLevel, Goal } from '../Data/Types';
+import { Programs, UserProfile, Workout, WorkoutSession } from '../Services/Types';
 
 export interface GlobalStateInterface {
+  activityLevels: ActivityLevel[];
+  goals: Goal[];
+  sessions: WorkoutSession[];
+  workouts: Workout[];
+  programs: Programs[];
   isUserAuthenticated: boolean;
   userProfile: UserProfile;
   persistenceType: string;

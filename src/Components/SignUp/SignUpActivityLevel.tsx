@@ -27,8 +27,19 @@ const SignUpActivityLevel = () => {
   };
 
   const onFinish = async () => {
-    fetch(endpoints.saveProfile, Method.Post, userProfile).then(() => {
-      dispatch({ type: "SET_USER_PROFILE", payload: userProfile });
+    const program = globalState.programs.find(
+      (program) =>
+        program.goalId === userProfile.goalId &&
+        program.activityLevelId === userProfile.activityLevelId
+    );
+
+    const workouts = globalState.workouts.filter((workout) =>
+      program?.workouts.includes(workout.id)
+    );
+
+    const profile = { ...userProfile, workouts: workouts };
+    fetch(endpoints.saveProfile, Method.Post, profile).then(() => {
+      dispatch({ type: "SET_USER_PROFILE", payload: profile });
       navigate(Routers.default);
     });
   };

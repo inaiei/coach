@@ -1,6 +1,9 @@
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Fragment, useContext } from "react";
-import CardSelector, { CardSelectorPosition } from "./Components/Base/CardSelector";
+import CardSelector, {
+  CardSelectorPosition,
+} from "./Components/Base/CardSelector";
 import MacroProtions from "./Components/Macros/MacroProtions";
 import WorkoutOfTheDay from "./Components/Workouts/WorkoutOfTheDay";
 import { mainMenu } from "./Data/MainMenu";
@@ -31,7 +34,18 @@ const Default = () => {
           <Typography component="h1" variant="h5" align="center">
             Let's get started
           </Typography>
-          <CardSelector items={mainMenu} position={CardSelectorPosition.Top} />
+
+          <Typography component="p">
+            Based on your answers we put together a nutrition plan and a
+            personalised workout just for you.
+          </Typography>
+
+          <Box sx={{ mt: 3 }}>
+            <CardSelector
+              items={mainMenu}
+              position={CardSelectorPosition.Top}
+            />
+          </Box>
         </Fragment>
       )}
     </DefaultContainer>

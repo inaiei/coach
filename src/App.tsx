@@ -21,10 +21,12 @@ import Macros from "./Macros";
 import NewWorkoutPage from "./NewWorkoutPage";
 import NotFound from "./NotFound";
 import Error from "./Error";
+import LoadData from "./LoadData";
 
 const App = () => {
   return (
     <GlobalStore>
+      <LoadData />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -48,7 +50,7 @@ const App = () => {
               <Route path={Routers.profile} element={<Profile />} />
               <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
               <Route path={Routers.workout} element={<WorkoutPage />} />
-              <Route path={Routers.workouts} element={<WorkoutsPage />} />
+              <Route path={Routers.myWorkouts} element={<WorkoutsPage />} />
               <Route path={Routers.login} element={<Login />} />
               <Route path={Routers.default} element={<Default />} />
               <Route path={Routers.macros} element={<Macros />} />

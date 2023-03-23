@@ -43,7 +43,7 @@ const CardSelectorItem = ({
                 ? positionGrid.top.media
                 : positionGrid.left.media
             }
-            sx={{ display: "flex", justifyContent: "center" }}
+            sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}
           >
             <CardMedia
               component="img"
