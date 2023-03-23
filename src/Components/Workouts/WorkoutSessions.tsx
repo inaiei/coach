@@ -1,5 +1,4 @@
 import React from "react";
-import ReactPlayer from "react-player";
 import Avatar from "@mui/material/Avatar/Avatar";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
@@ -8,6 +7,7 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import { WorkoutSession } from "../../Services/Types";
+import { Media, Video } from "@vidstack/player-react";
 
 interface WorkoutSessionsProps {
   sessions?: WorkoutSession[];
@@ -48,7 +48,16 @@ const WorkoutSessions = ({ sessions }: WorkoutSessionsProps) => {
           </ListItem>
           {!session.completed ? (
             <ListItem alignItems="center">
-              <ReactPlayer url={session.video}  style={{ margin:'auto'}}/>
+              <Media>
+                <Video loading="visible" controls>
+                  <video
+                    src={session.video}
+                    preload="none"
+                    data-video="0"
+                    controls
+                  />
+                </Video>
+              </Media>
             </ListItem>
           ) : null}
           <Divider component="li" />
