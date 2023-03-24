@@ -16,10 +16,6 @@ const MyWorkouts = () => {
 
   return (
     <Fragment>
-      {/* <Typography component="h1" variant="h5">
-        My workouts
-      </Typography> */}
-
       <List sx={{ width: "100%" }}>
         {globalState.userProfile.workouts?.map((workout, index) => (
           <Fragment key={"session-" + index}>

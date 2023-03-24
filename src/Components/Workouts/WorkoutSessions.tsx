@@ -60,7 +60,7 @@ const WorkoutSessions = ({ sessions }: WorkoutSessionsProps) => {
               </Media>
             </ListItem>
           ) : null}
-          <Divider component="li" />
+          {/* <Divider component="li" /> */}
         </React.Fragment>
       ))}
     </List>
