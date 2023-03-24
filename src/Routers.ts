@@ -8,7 +8,8 @@ const Routers = {
     profile: '/profile',
     newWorkout: '/new-workout', 
     workout: '/workout/:id', 
-    myWorkouts: '/my-workouts', 
+    myWorkouts: '/my-workouts',
+    manageMyWorkouts: '/manage-my-workouts/:id',  
     login: '/login', 
     logout: '/logout',
     macros: '/macros'

@@ -50,6 +50,7 @@ export type WorkoutSession = {
   description: string;
   video: string;
   completed: boolean;
+  tags: string[];
 }
 
 export type Macros = {

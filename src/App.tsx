@@ -22,6 +22,7 @@ import NewWorkoutPage from "./NewWorkoutPage";
 import NotFound from "./NotFound";
 import Error from "./Error";
 import LoadData from "./LoadData";
+import ManageWorkoutsPage from "./ManageWorkoutsPage";
 
 const App = () => {
   return (
@@ -51,6 +52,7 @@ const App = () => {
               <Route path={Routers.newWorkout} element={<NewWorkoutPage />} />
               <Route path={Routers.workout} element={<WorkoutPage />} />
               <Route path={Routers.myWorkouts} element={<WorkoutsPage />} />
+              <Route path={Routers.manageMyWorkouts} element={<ManageWorkoutsPage />} />
               <Route path={Routers.login} element={<Login />} />
               <Route path={Routers.default} element={<Default />} />
               <Route path={Routers.macros} element={<Macros />} />
